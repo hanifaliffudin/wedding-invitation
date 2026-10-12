@@ -10,54 +10,54 @@ window.INVITATION_DATA = {
     second: "Rafi"
   },
   hosts: {
-    id: ["Putri dari keluarga Contoh", "Putra dari keluarga Contoh"],
-    en: ["Daughter of the Sample family", "Son of the Sample family"]
+    id: ["Putri dari Bapak Arman dan Ibu Ratih", "Putra dari Bapak Hendra dan Ibu Maya"],
+    en: ["Daughter of Mr. Arman and Mrs. Ratih", "Son of Mr. Hendra and Mrs. Maya"]
   },
-  whatsappNumber: "00000000",
+  whatsappNumber: "",
   guestNotes: [
     {
       label: { id: "Busana", en: "Dress code" },
       value: {
-        id: "Busana rapi dengan warna netral. (Informasi contoh.)",
-        en: "Smart attire in neutral colors. (Sample information.)"
+        id: "Busana formal dengan palet warna netral bernuansa bumi.",
+        en: "Formal attire in a neutral, earth-toned palette."
       }
     },
     {
       label: { id: "Parkir", en: "Parking" },
       value: {
-        id: "Area parkir tersedia di sekitar venue. (Informasi contoh.)",
-        en: "Parking is available near the venue. (Sample information.)"
+        id: "Parkir tersedia di area venue. Mohon mengikuti arahan petugas saat tiba.",
+        en: "Parking is available at the venue. Please follow the attendants' directions upon arrival."
       }
     },
     {
       label: { id: "Akses", en: "Accessibility" },
       value: {
-        id: "Silakan hubungi keluarga untuk informasi akses venue. (Kontak contoh.)",
-        en: "Please contact the family for venue accessibility details. (Sample contact.)"
+        id: "Bila memerlukan dukungan akses khusus, silakan cantumkan pada catatan RSVP agar dapat kami siapkan.",
+        en: "If you need accessibility assistance, please include a note with your RSVP so we can make arrangements."
       }
     },
     {
       label: { id: "Penginapan", en: "Accommodation" },
       value: {
-        id: "Beberapa penginapan tersedia di sekitar Cilandak. (Informasi contoh.)",
-        en: "Several accommodation options are available around Cilandak. (Sample information.)"
+        id: "Beragam pilihan penginapan tersedia di sekitar Cilandak. Pemesanan lebih awal disarankan.",
+        en: "A range of accommodation options is available around Cilandak. Early booking is recommended."
       }
     },
     {
-      label: { id: "Pertanyaan umum", en: "Frequently asked" },
+      label: { id: "Pendamping", en: "Additional guests" },
       value: {
-        id: "Contoh: konfirmasi kehadiran dapat dikirim melalui formulir RSVP di halaman ini.",
-        en: "Sample: confirm your attendance using the RSVP form on this page."
+        id: "Mohon menyesuaikan jumlah kehadiran dengan kapasitas yang tercantum pada undangan.",
+        en: "Please keep your party within the guest count stated on your invitation."
       }
     }
   ],
   giftInfo: {
-    id: "Contoh pratinjau: doa restu Anda adalah hadiah terbaik bagi kami. Informasi hadiah lain belum tersedia.",
-    en: "Preview example: your good wishes are the greatest gift. Other gift details are not available yet."
+    id: "Kehadiran dan doa restu Anda merupakan hadiah yang paling berarti bagi kami.",
+    en: "Your presence and kind wishes are the most meaningful gift to us."
   },
   story: {
-    id: "Kami bertemu di sebuah kelas kopi di Bandung pada 2019. Sejak itu, perjalanan sederhana terasa semakin berarti.",
-    en: "We met at a coffee class in Bandung in 2019. Since then, every small journey has meant a little more."
+    id: "Kami pertama kali bertemu di sebuah kelas kopi di Bandung pada 2019. Percakapan sederhana hari itu tumbuh menjadi persahabatan, lalu menjadi perjalanan yang kami syukuri hingga kini. Dengan restu keluarga, kami menantikan babak baru bersama.",
+    en: "We first met at a coffee class in Bandung in 2019. A simple conversation grew into a friendship, then a journey we are grateful to share. With our families' blessing, we look forward to beginning our next chapter together."
   },
   events: [
     {
@@ -72,8 +72,8 @@ window.INVITATION_DATA = {
         en: "Kenanga Pavilion"
       },
       address: {
-        id: "Jl. Contoh No. 8, Cilandak, Jakarta Selatan 12430",
-        en: "8 Example Street, Cilandak, South Jakarta 12430"
+        id: "Jl. Cendana No. 8, Cilandak Barat, Jakarta Selatan 12430",
+        en: "8 Cendana Street, West Cilandak, South Jakarta 12430"
       },
       mapUrl: "https://maps.google.com/?q=Paviliun+Kenanga+Cilandak+Jakarta"
     },
@@ -89,8 +89,8 @@ window.INVITATION_DATA = {
         en: "Seruni Garden"
       },
       address: {
-        id: "Jl. Contoh No. 18, Cilandak, Jakarta Selatan 12430",
-        en: "18 Example Street, Cilandak, South Jakarta 12430"
+        id: "Jl. Kemuning No. 18, Cilandak Barat, Jakarta Selatan 12430",
+        en: "18 Kemuning Street, West Cilandak, South Jakarta 12430"
       },
       mapUrl: "https://maps.google.com/?q=Taman+Seruni+Cilandak+Jakarta"
     }

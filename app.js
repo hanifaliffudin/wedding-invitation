@@ -6,8 +6,8 @@
     id: {
       description: "Undangan pernikahan digital.",
       skip: "Lewati ke undangan",
-      "preview.label": "Data contoh",
-      "preview.message": "Pratinjau ini memakai detail fiktif dan foto stok berlisensi, bukan foto pasangan. Jangan dibagikan kepada tamu.",
+      "preview.label": "Pratinjau Undangan",
+      "preview.message": "Undangan ini masih dalam pratinjau. Nama, kisah pasangan, dan seluruh informasi acara akan diperbarui setelah dikonfirmasi.",
       "cover.kicker": "Undangan Pernikahan",
       "cover.intro": "Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan hari istimewa bersama kami.",
       "cover.open": "Buka Undangan",
@@ -25,27 +25,27 @@
       "calendar.download": "Tambahkan ke Kalender",
       "calendar.downloaded": "File kalender berhasil diunduh.",
       "music.label": "Musik pilihan pasangan",
-      "date.tbd": "Tanggal akan diisi",
+      "date.tbd": "Tanggal akan diumumkan",
       "story.kicker": "Tentang Kami",
       "story.title": "Sebuah cerita",
       "details.kicker": "Catat tanggalnya",
       "details.title": "Rangkaian Acara",
       "details.intro": "Kami akan sangat bahagia jika Anda dapat hadir.",
-      "event.dateTbd": "Waktu acara akan diisi",
-      "event.venueTbd": "Nama tempat akan diisi",
-      "event.addressTbd": "Alamat akan diisi",
+      "event.dateTbd": "Jadwal acara akan diumumkan",
+      "event.venueTbd": "Lokasi akan diumumkan",
+      "event.addressTbd": "Alamat lengkap akan diumumkan",
       "event.map": "Lihat peta",
       "location.kicker": "Temukan kami",
       "location.title": "Lokasi Acara",
-      "location.intro": "Informasi lokasi akan ditambahkan setelah tempat acara ditentukan.",
+      "location.intro": "Rincian lokasi akan diumumkan melalui undangan ini.",
       "location.map": "Buka peta",
       "gallery.kicker": "Referensi Visual",
       "gallery.title": "Inspirasi Pernikahan",
-      "gallery.note": "Foto stok untuk inspirasi pratinjau; bukan foto Nadia & Rafi.",
-      "gallery.placeholder": "Foto pasangan akan ditambahkan di sini setelah tersedia.",
+      "gallery.note": "Foto editorial berlisensi ditampilkan untuk pratinjau; bukan dokumentasi pasangan.",
+      "gallery.placeholder": "Galeri foto pasangan akan ditampilkan di bagian ini.",
       "guest.kicker": "Untuk Anda",
       "guest.title": "Informasi untuk Tamu",
-      "guest.intro": "Catatan singkat untuk membantu Anda merencanakan kehadiran.",
+      "guest.intro": "Informasi yang perlu diketahui sebelum hari acara.",
       "guest.giftTitle": "Informasi Hadiah",
       "rsvp.kicker": "Kabar dari Anda",
       "rsvp.title": "Konfirmasi Kehadiran",
@@ -60,17 +60,15 @@
       "rsvp.note": "Pesan untuk pasangan",
       "rsvp.optional": "(opsional)",
       "rsvp.prepare": "Siapkan Pesan RSVP",
-      "rsvp.privacy": "Jawaban tidak disimpan di situs ini. Anda akan mengirimkannya sendiri melalui WhatsApp.",
+      "rsvp.privacy": "Jawaban tidak disimpan di situs ini. Pada undangan final, RSVP dikirim melalui WhatsApp.",
       "rsvp.messageLabel": "Pratinjau pesan",
       "rsvp.openWhatsapp": "Buka WhatsApp untuk mengirim",
-      "rsvp.openWhatsappPreview": "Buka tautan WhatsApp dummy",
       "rsvp.copy": "Salin Pesan",
       "rsvp.errorName": "Masukkan nama Anda untuk melanjutkan.",
       "rsvp.errorAttendance": "Pilih konfirmasi kehadiran Anda.",
       "rsvp.errorGuestCount": "Masukkan jumlah tamu minimal satu orang.",
       "rsvp.statusReady": "Pesan RSVP sudah disiapkan. Lanjutkan ke WhatsApp, lalu tekan tombol Kirim untuk mengonfirmasi.",
-      "rsvp.statusPreview": "Mode pratinjau: pesan belum dikirim karena nomor WhatsApp pasangan belum diisi.",
-      "rsvp.statusPreviewNumber": "Mode pratinjau: tautan memakai nomor dummy. Jangan kirim pesan.",
+      "rsvp.statusPreview": "Pengiriman melalui WhatsApp belum tersedia. Pesan RSVP dapat disalin dan dikirim secara manual.",
       "rsvp.messageGreeting": "Halo, saya {name}.",
       "rsvp.messageAttending": "Saya mengonfirmasi akan hadir.",
       "rsvp.messageNotAttending": "Mohon maaf, saya belum dapat hadir.",
@@ -86,8 +84,8 @@
     en: {
       description: "Digital wedding invitation.",
       skip: "Skip to the invitation",
-      "preview.label": "Sample data",
-      "preview.message": "This preview uses fictional details and licensed stock photos, not photos of the couple. Do not share it with guests.",
+      "preview.label": "Invitation Preview",
+      "preview.message": "This invitation is in preview. The couple's names, story, and event details will be updated once confirmed.",
       "cover.kicker": "Wedding Invitation",
       "cover.intro": "With gratitude, we invite you to celebrate this special day with us.",
       "cover.open": "Open Invitation",
@@ -105,27 +103,27 @@
       "calendar.download": "Add to calendar",
       "calendar.downloaded": "The calendar file has been downloaded.",
       "music.label": "The couple’s chosen music",
-      "date.tbd": "Wedding date to be added",
+      "date.tbd": "Date to be announced",
       "story.kicker": "About Us",
       "story.title": "Our story",
       "details.kicker": "Save the date",
       "details.title": "Wedding Schedule",
       "details.intro": "We would be delighted if you could join us.",
-      "event.dateTbd": "Event time to be added",
-      "event.venueTbd": "Venue name to be added",
-      "event.addressTbd": "Address to be added",
+      "event.dateTbd": "Event schedule to be announced",
+      "event.venueTbd": "Venue to be announced",
+      "event.addressTbd": "Full address to be announced",
       "event.map": "View map",
       "location.kicker": "Find us",
       "location.title": "Event Locations",
-      "location.intro": "Location details will be added once the venue is confirmed.",
+      "location.intro": "Location details will be shared in this invitation.",
       "location.map": "Open map",
       "gallery.kicker": "Visual References",
       "gallery.title": "Wedding Inspiration",
-      "gallery.note": "Licensed stock photos for preview inspiration; not photos of Nadia & Rafi.",
-      "gallery.placeholder": "Couple photos will be added here when available.",
+      "gallery.note": "Licensed editorial photos are shown for preview; they do not document the couple.",
+      "gallery.placeholder": "The couple's photo gallery will appear here.",
       "guest.kicker": "For You",
       "guest.title": "Guest Information",
-      "guest.intro": "A few notes to help you plan your visit.",
+      "guest.intro": "Information to help you prepare for the celebration.",
       "guest.giftTitle": "Gift Information",
       "rsvp.kicker": "A note from you",
       "rsvp.title": "Please RSVP",
@@ -140,17 +138,15 @@
       "rsvp.note": "A note for the couple",
       "rsvp.optional": "(optional)",
       "rsvp.prepare": "Prepare RSVP Message",
-      "rsvp.privacy": "Your response is not stored on this site. You will send it yourself through WhatsApp.",
+      "rsvp.privacy": "Your response is not stored on this site. The final invitation will send RSVP messages through WhatsApp.",
       "rsvp.messageLabel": "Message preview",
       "rsvp.openWhatsapp": "Open WhatsApp to send",
-      "rsvp.openWhatsappPreview": "Open dummy WhatsApp link",
       "rsvp.copy": "Copy Message",
       "rsvp.errorName": "Enter your name to continue.",
       "rsvp.errorAttendance": "Choose your attendance response.",
       "rsvp.errorGuestCount": "Enter at least one guest.",
       "rsvp.statusReady": "Your RSVP message is ready. Continue to WhatsApp, then tap Send to confirm.",
-      "rsvp.statusPreview": "Preview mode: the message was not sent because the couple's WhatsApp number has not been added.",
-      "rsvp.statusPreviewNumber": "Preview mode: this link uses a dummy number. Do not send the message.",
+      "rsvp.statusPreview": "WhatsApp handoff is not available. Copy the RSVP message to send it manually.",
       "rsvp.messageGreeting": "Hello, my name is {name}.",
       "rsvp.messageAttending": "I confirm that I will attend.",
       "rsvp.messageNotAttending": "I am sorry, but I cannot attend.",
@@ -640,19 +636,15 @@
   function renderRsvpResult() {
     if (!lastRsvp) return;
     const message = prepareMessage();
-    const number = validWhatsAppNumber();
+    const number = DATA.previewMode ? "" : validWhatsAppNumber();
     const preview = byId("messagePreview");
     const link = byId("whatsappLink");
     preview.value = message;
-    text("rsvpStatus", number
-      ? (DATA.previewMode ? COPY[language]["rsvp.statusPreviewNumber"] : COPY[language]["rsvp.statusReady"])
-      : COPY[language]["rsvp.statusPreview"]);
+    text("rsvpStatus", number ? COPY[language]["rsvp.statusReady"] : COPY[language]["rsvp.statusPreview"]);
     if (link) {
       link.hidden = !number;
       if (number) {
-        link.textContent = DATA.previewMode
-          ? COPY[language]["rsvp.openWhatsappPreview"]
-          : COPY[language]["rsvp.openWhatsapp"];
+        link.textContent = COPY[language]["rsvp.openWhatsapp"];
         const url = new URL("https://wa.me/" + number);
         url.searchParams.set("text", message);
         link.href = url.href;

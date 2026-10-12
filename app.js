@@ -22,6 +22,9 @@
       "hero.kicker": "Dengan penuh kebahagiaan",
       "hero.invitation": "mengundang Anda untuk hadir dan berbagi kebahagiaan di hari pernikahan kami.",
       "hero.countdown": "hari menuju hari bahagia",
+      "calendar.download": "Tambahkan ke Kalender",
+      "calendar.downloaded": "File kalender berhasil diunduh.",
+      "music.label": "Musik pilihan pasangan",
       "date.tbd": "Tanggal akan diisi",
       "story.kicker": "Tentang Kami",
       "story.title": "Sebuah cerita",
@@ -92,6 +95,9 @@
       "hero.kicker": "With great joy",
       "hero.invitation": "invite you to join us and share in the joy of our wedding day.",
       "hero.countdown": "days until the celebration",
+      "calendar.download": "Add to calendar",
+      "calendar.downloaded": "The calendar file has been downloaded.",
+      "music.label": "The couple’s chosen music",
       "date.tbd": "Wedding date to be added",
       "story.kicker": "About Us",
       "story.title": "Our story",
@@ -172,6 +178,8 @@
   }
 
   let lastRsvp = null;
+  let revealObserver = null;
+  let invitationOpened = false;
 
   function renderCopy() {
     const copy = COPY[language];
@@ -194,6 +202,7 @@
     if (description) description.content = copy.description;
     renderEventContent();
     renderOptionalContent();
+    renderMusicPlayer();
   }
 
   function formatDate(dateValue, options) {
@@ -247,6 +256,156 @@
     }
   }
 
+  function calendarDate(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return date.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+  }
+
+  function escapeCalendarText(value) {
+    return String(value || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/\r?\n/g, "\\n")
+      .replace(/,/g, "\\,")
+      .replace(/;/g, "\\;");
+  }
+
+  function foldCalendarLine(line) {
+    const encoder = new TextEncoder();
+    let output = "";
+    let byteCount = 0;
+    for (const character of line) {
+      const characterBytes = encoder.encode(character).length;
+      if (byteCount + characterBytes > 75) {
+        output += "\r\n ";
+        byteCount = 1;
+      }
+      output += character;
+      byteCount += characterBytes;
+    }
+    return output;
+  }
+
+  function createCalendarFile() {
+    const events = Array.isArray(DATA.events) ? DATA.events : [];
+    const coupleName = [DATA.couple && DATA.couple.first, DATA.couple && DATA.couple.second]
+      .filter(Boolean)
+      .join(" & ");
+    const nameSlug = coupleName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "wedding";
+    const timestamp = calendarDate(new Date());
+    const calendarEvents = events.map(function (event, index) {
+      const startsAt = calendarDate(event.startsAt);
+      if (!startsAt) return "";
+      const start = new Date(event.startsAt);
+      const end = event.endsAt ? new Date(event.endsAt) : null;
+      const title = localized(event.title, language, (language === "id" ? "Acara " : "Event ") + (index + 1));
+      const venue = localized(event.venue, language, "");
+      const address = localized(event.address, language, "");
+      const location = [venue, address].filter(Boolean).join(", ");
+      const mapUrl = safeMapUrl(event.mapUrl);
+      const uidDate = startsAt.replace(/[^0-9TZ]/g, "");
+      const lines = [
+        "BEGIN:VEVENT",
+        "UID:" + nameSlug + "-" + (index + 1) + "-" + uidDate + "@wedding-invitation.local",
+        "DTSTAMP:" + timestamp,
+        "DTSTART:" + startsAt
+      ];
+      if (end && !Number.isNaN(end.getTime()) && end > start) {
+        lines.push("DTEND:" + calendarDate(end));
+      }
+      lines.push("SUMMARY:" + escapeCalendarText(title));
+      if (location) lines.push("LOCATION:" + escapeCalendarText(location));
+      if (coupleName) lines.push("DESCRIPTION:" + escapeCalendarText(coupleName));
+      if (mapUrl) lines.push("URL:" + mapUrl);
+      lines.push("STATUS:CONFIRMED", "END:VEVENT");
+      return lines.join("\r\n");
+    }).filter(Boolean);
+
+    if (calendarEvents.length === 0) return false;
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Wedding Invitation//ID",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "X-WR-CALNAME:" + escapeCalendarText(coupleName || (language === "id" ? "Pernikahan" : "Wedding")),
+      ...calendarEvents,
+      "END:VCALENDAR"
+    ];
+    const fileContents = lines.map(foldCalendarLine).join("\r\n") + "\r\n";
+    const file = new Blob([fileContents], { type: "text/calendar;charset=utf-8" });
+    const objectUrl = URL.createObjectURL(file);
+    const link = document.createElement("a");
+    link.href = objectUrl;
+    link.download = nameSlug + "-wedding.ics";
+    link.hidden = true;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(function () { URL.revokeObjectURL(objectUrl); }, 1000);
+    const status = byId("calendarStatus");
+    if (status) {
+      status.textContent = COPY[language]["calendar.downloaded"];
+      status.hidden = false;
+    }
+    return true;
+  }
+
+  function renderMusicPlayer() {
+    const player = byId("musicPlayer");
+    const audio = byId("invitationAudio");
+    if (!player || !audio) return;
+    const music = DATA.music || {};
+    const source = String(music.src || "").trim();
+    let safeSource = "";
+    if (source) {
+      try {
+        const url = new URL(source, document.baseURI);
+        if (url.protocol === "https:" || url.origin === window.location.origin) safeSource = url.href;
+      } catch (error) {
+        safeSource = "";
+      }
+    }
+    if (safeSource && audio.dataset.source !== safeSource) {
+      audio.src = safeSource;
+      audio.dataset.source = safeSource;
+      audio.load();
+    }
+    player.hidden = !safeSource;
+    const title = localized(music.title, language, "");
+    text("musicTitle", title);
+    audio.setAttribute("aria-label", language === "id" ? "Putar atau jeda musik undangan" : "Play or pause the invitation music");
+  }
+
+  function observeRevealTargets(root) {
+    if (!revealObserver || !root) return;
+    const targets = [];
+    if (root.matches && root.matches("[data-reveal]")) targets.push(root);
+    if (root.querySelectorAll) targets.push.apply(targets, root.querySelectorAll("[data-reveal]"));
+    targets.forEach(function (target) {
+      if (!target.classList.contains("is-visible")) revealObserver.observe(target);
+    });
+  }
+
+  function prepareScrollReveals() {
+    const targets = document.querySelectorAll("[data-reveal]");
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      targets.forEach(function (target) { target.classList.add("is-visible"); });
+      return;
+    }
+    document.documentElement.classList.add("motion-ready");
+    revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+    observeRevealTargets(document);
+  }
+
   function createTextElement(tagName, className, value) {
     const node = document.createElement(tagName);
     if (className) node.className = className;
@@ -273,6 +432,8 @@
 
       const card = document.createElement("article");
       card.className = "event-card";
+      card.setAttribute("data-reveal", "");
+      card.style.setProperty("--reveal-delay", Math.min(index * 120, 240) + "ms");
       const inner = document.createElement("div");
       inner.className = "event-card__inner";
       inner.appendChild(createTextElement("span", "event-card__ornament", "❧"));
@@ -311,6 +472,12 @@
       locationList.appendChild(location);
     });
 
+    const calendarButton = byId("downloadCalendar");
+    if (calendarButton) {
+      calendarButton.hidden = !events.some(function (event) { return Boolean(calendarDate(event.startsAt)); });
+    }
+    observeRevealTargets(eventList);
+
     const hasLocation = events.some(function (event) {
       return localized(event.venue, language, "").trim() || localized(event.address, language, "").trim();
     });
@@ -345,6 +512,7 @@
       image.src = photo.src;
       image.alt = localized(photo.alt, language, language === "id" ? "Foto pasangan" : "A photo of the couple");
       image.loading = "lazy";
+      image.decoding = "async";
       figure.appendChild(image);
       galleryGrid.appendChild(figure);
     });
@@ -489,16 +657,35 @@
   }
 
   function openInvitation() {
+    if (invitationOpened) return;
+    invitationOpened = true;
     const cover = byId("cover");
     const site = byId("site");
-    if (cover) cover.hidden = true;
-    if (site) site.hidden = false;
     const hero = byId("home");
-    if (hero) {
-      hero.setAttribute("tabindex", "-1");
-      hero.focus({ preventScroll: true });
-      hero.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    const button = byId("openInvitation");
+    const reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (button) button.disabled = true;
+    if (cover && !reduceMotion) cover.classList.add("cover--opening");
+
+    function revealPage() {
+      if (cover) cover.hidden = true;
+      if (site) {
+        site.hidden = false;
+        if (!reduceMotion) site.classList.add("site--entering");
+      }
+      prepareScrollReveals();
+      if (hero) {
+        hero.setAttribute("tabindex", "-1");
+        hero.focus({ preventScroll: true });
+        hero.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+      }
+      if (!reduceMotion && site) {
+        window.setTimeout(function () { site.classList.remove("site--entering"); }, 720);
+      }
     }
+
+    if (reduceMotion) revealPage();
+    else window.setTimeout(revealPage, 620);
   }
 
   const previewBanner = byId("previewBanner");
@@ -509,6 +696,7 @@
     });
   });
   byId("openInvitation").addEventListener("click", openInvitation);
+  byId("downloadCalendar").addEventListener("click", createCalendarFile);
 
   document.querySelectorAll('input[name="attendance"]').forEach(function (input) {
     input.addEventListener("change", function () {

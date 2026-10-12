@@ -20,6 +20,7 @@ window.INVITATION_DATA = {
         en: "Wedding Ceremony"
       },
       startsAt: "2027-06-12T09:00:00+07:00",
+      endsAt: "2027-06-12T10:00:00+07:00",
       venue: {
         id: "Paviliun Kenanga",
         en: "Kenanga Pavilion"
@@ -36,6 +37,7 @@ window.INVITATION_DATA = {
         en: "Reception"
       },
       startsAt: "2027-06-12T11:00:00+07:00",
+      endsAt: "2027-06-12T14:00:00+07:00",
       venue: {
         id: "Taman Seruni",
         en: "Seruni Garden"
@@ -47,5 +49,12 @@ window.INVITATION_DATA = {
       mapUrl: "https://maps.google.com/?q=Taman+Seruni+Cilandak+Jakarta"
     }
   ],
-  photos: []
+  photos: [],
+  music: {
+    src: "",
+    title: {
+      id: "",
+      en: ""
+    }
+  }
 };

@@ -27,10 +27,10 @@
           <button type="button" class="language-switch__button" data-language="en" aria-pressed="false">EN</button>
         </div>
         <svg class="botanical botanical--cover" viewBox="0 0 150 190" aria-hidden="true">
-          <path d="M21 177C37 144 49 107 54 68c2-18 1-34-3-51M36 143c-13-1-22-9-26-22 14-2 23 5 26 22ZM45 111c-12-4-18-14-18-27 14 1 21 10 18 27ZM51 81c-10-6-14-17-10-29 13 4 17 13 10 29ZM53 60c-2-13 3-23 14-30 7 12 2 23-14 30ZM40 132c9-12 20-16 33-11-5 14-16 18-33 11ZM49 101c8-11 19-14 31-8-5 13-16 16-31 8ZM53 72c7-11 17-14 28-9-4 12-14 16-28 9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+          <path pathLength="1" d="M21 177C37 144 49 107 54 68c2-18 1-34-3-51M36 143c-13-1-22-9-26-22 14-2 23 5 26 22ZM45 111c-12-4-18-14-18-27 14 1 21 10 18 27ZM51 81c-10-6-14-17-10-29 13 4 17 13 10 29ZM53 60c-2-13 3-23 14-30 7 12 2 23-14 30ZM40 132c9-12 20-16 33-11-5 14-16 18-33 11ZM49 101c8-11 19-14 31-8-5 13-16 16-31 8ZM53 72c7-11 17-14 28-9-4 12-14 16-28 9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
         </svg>
         <svg class="botanical botanical--cover botanical--cover-right" viewBox="0 0 150 190" aria-hidden="true">
-          <path d="M21 177C37 144 49 107 54 68c2-18 1-34-3-51M36 143c-13-1-22-9-26-22 14-2 23 5 26 22ZM45 111c-12-4-18-14-18-27 14 1 21 10 18 27ZM51 81c-10-6-14-17-10-29 13 4 17 13 10 29ZM53 60c-2-13 3-23 14-30 7 12 2 23-14 30ZM40 132c9-12 20-16 33-11-5 14-16 18-33 11ZM49 101c8-11 19-14 31-8-5 13-16 16-31 8ZM53 72c7-11 17-14 28-9-4 12-14 16-28 9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
+          <path pathLength="1" d="M21 177C37 144 49 107 54 68c2-18 1-34-3-51M36 143c-13-1-22-9-26-22 14-2 23 5 26 22ZM45 111c-12-4-18-14-18-27 14 1 21 10 18 27ZM51 81c-10-6-14-17-10-29 13 4 17 13 10 29ZM53 60c-2-13 3-23 14-30 7 12 2 23-14 30ZM40 132c9-12 20-16 33-11-5 14-16 18-33 11ZM49 101c8-11 19-14 31-8-5 13-16 16-31 8ZM53 72c7-11 17-14 28-9-4 12-14 16-28 9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
         </svg>
         <div class="cover__inner">
           <p class="eyebrow" data-copy="cover.kicker">Undangan Pernikahan</p>
@@ -81,11 +81,20 @@
               <span class="countdown__number" id="countdownDays">0</span>
               <span class="countdown__label" data-copy="hero.countdown">hari menuju hari bahagia</span>
             </div>
+            <div class="hero__actions">
+              <button class="button button--secondary calendar-button" id="downloadCalendar" type="button" hidden data-copy="calendar.download">Tambahkan ke Kalender</button>
+              <p class="calendar-status" id="calendarStatus" role="status" aria-live="polite" hidden></p>
+            </div>
+            <div class="music-player" id="musicPlayer" hidden>
+              <p class="music-player__label" data-copy="music.label">Musik pilihan pasangan</p>
+              <p class="music-player__title" id="musicTitle"></p>
+              <audio id="invitationAudio" controls preload="none" aria-label="Putar atau jeda musik undangan"></audio>
+            </div>
           </div>
           <div class="hero__bottom-rule" aria-hidden="true"><span></span></div>
         </section>
 
-        <section class="story-section section-shell" id="story" aria-labelledby="storyTitle" hidden>
+        <section class="story-section section-shell" id="story" aria-labelledby="storyTitle" data-reveal hidden>
           <div class="section-heading">
             <p class="eyebrow" data-copy="story.kicker">Tentang Kami</p>
             <h2 id="storyTitle" data-copy="story.title">Sebuah cerita</h2>
@@ -93,7 +102,7 @@
           <p class="story-section__text" id="storyText"></p>
         </section>
 
-        <section class="details-section section-shell" id="details" aria-labelledby="detailsTitle">
+        <section class="details-section section-shell" id="details" aria-labelledby="detailsTitle" data-reveal>
           <div class="section-heading">
             <p class="eyebrow" data-copy="details.kicker">Catat tanggalnya</p>
             <h2 id="detailsTitle" data-copy="details.title">Rangkaian Acara</h2>
@@ -102,7 +111,7 @@
           <div class="event-list" id="eventList"></div>
         </section>
 
-        <section class="gallery-section section-shell" id="gallery" aria-labelledby="galleryTitle" hidden>
+        <section class="gallery-section section-shell" id="gallery" aria-labelledby="galleryTitle" data-reveal hidden>
           <div class="section-heading">
             <p class="eyebrow" data-copy="gallery.kicker">Momen Kami</p>
             <h2 id="galleryTitle" data-copy="gallery.title">Galeri</h2>
@@ -110,7 +119,7 @@
           <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
-        <section class="location-section section-shell" id="location" aria-labelledby="locationTitle">
+        <section class="location-section section-shell" id="location" aria-labelledby="locationTitle" data-reveal>
           <div class="location-section__ornament" aria-hidden="true">❧</div>
           <div class="section-heading">
             <p class="eyebrow" data-copy="location.kicker">Temukan kami</p>
@@ -120,7 +129,7 @@
           <div class="location-list" id="locationList"></div>
         </section>
 
-        <section class="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvpTitle">
+        <section class="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvpTitle" data-reveal>
           <div class="section-heading">
             <p class="eyebrow" data-copy="rsvp.kicker">Kabar dari Anda</p>
             <h2 id="rsvpTitle" data-copy="rsvp.title">Konfirmasi Kehadiran</h2>
@@ -175,7 +184,7 @@
           </div>
         </section>
 
-        <section class="closing-section section-shell" aria-labelledby="closingTitle">
+        <section class="closing-section section-shell" aria-labelledby="closingTitle" data-reveal>
           <svg class="botanical botanical--closing" viewBox="0 0 150 190" aria-hidden="true">
             <path d="M21 177C37 144 49 107 54 68c2-18 1-34-3-51M36 143c-13-1-22-9-26-22 14-2 23 5 26 22ZM45 111c-12-4-18-14-18-27 14 1 21 10 18 27ZM51 81c-10-6-14-17-10-29 13 4 17 13 10 29ZM53 60c-2-13 3-23 14-30 7 12 2 23-14 30ZM40 132c9-12 20-16 33-11-5 14-16 18-33 11ZM49 101c8-11 19-14 31-8-5 13-16 16-31 8ZM53 72c7-11 17-14 28-9-4 12-14 16-28 9Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.25"/>
           </svg>

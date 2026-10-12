@@ -132,6 +132,25 @@ textarea:focus-visible {
   outline-offset: -0.55rem;
   background: var(--paper);
   text-align: center;
+  transform-origin: center top;
+  transition: opacity 260ms ease 340ms, transform 420ms cubic-bezier(0.2, 0.68, 0.24, 1) 180ms;
+}
+
+.cover--opening .cover__frame {
+  opacity: 0;
+  transform: translateY(-0.85rem) scale(0.985);
+}
+
+.cover--opening .botanical--cover path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: botanical-draw 360ms ease-out both;
+}
+
+@keyframes botanical-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 .cover__frame::before,
@@ -301,6 +320,36 @@ textarea:focus-visible {
   background: var(--paper);
 }
 
+.site--entering .site-header {
+  animation: header-arrival 360ms ease-out both;
+}
+
+.site--entering .hero {
+  animation: hero-arrival 560ms cubic-bezier(0.2, 0.68, 0.24, 1) 80ms both;
+}
+
+@keyframes header-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(-0.45rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(0.65rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .brand {
   display: inline-flex;
   min-height: 2.75rem;
@@ -460,6 +509,49 @@ textarea:focus-visible {
 .countdown__label {
   font-family: var(--sans);
   font-size: 0.8rem;
+}
+
+.hero__actions {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  margin-top: 1.35rem;
+}
+
+.calendar-button {
+  min-height: 2.9rem;
+}
+
+.calendar-status {
+  margin: 0;
+  color: var(--plum);
+  font-size: 0.82rem;
+}
+
+.music-player {
+  width: min(100%, 25rem);
+  margin: 1.8rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.music-player__label,
+.music-player__title {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.music-player__title:not(:empty) {
+  margin-top: 0.15rem;
+  color: var(--ink);
+}
+
+.music-player audio {
+  display: block;
+  width: 100%;
+  min-height: 2.9rem;
+  margin-top: 0.55rem;
 }
 
 .hero__bottom-rule {
@@ -875,6 +967,18 @@ textarea:focus-visible {
   margin: 0;
 }
 
+.motion-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(0.8rem);
+  transition: opacity 520ms ease, transform 520ms cubic-bezier(0.2, 0.68, 0.24, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.motion-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 46rem) {
   :root {
     --gutter: 1.15rem;
@@ -1047,5 +1151,12 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .motion-ready [data-reveal],
+  .motion-ready [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

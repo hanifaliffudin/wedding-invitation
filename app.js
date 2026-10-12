@@ -7,7 +7,7 @@
       description: "Undangan pernikahan digital.",
       skip: "Lewati ke undangan",
       "preview.label": "Data contoh",
-      "preview.message": "Pratinjau ini memakai nama, tanggal, lokasi, dan kontak fiktif. Jangan dibagikan kepada tamu.",
+      "preview.message": "Pratinjau ini memakai detail fiktif dan foto stok berlisensi, bukan foto pasangan. Jangan dibagikan kepada tamu.",
       "cover.kicker": "Undangan Pernikahan",
       "cover.intro": "Dengan penuh rasa syukur, kami mengundang Anda untuk merayakan hari istimewa bersama kami.",
       "cover.open": "Buka Undangan",
@@ -39,8 +39,9 @@
       "location.title": "Lokasi Acara",
       "location.intro": "Informasi lokasi akan ditambahkan setelah tempat acara ditentukan.",
       "location.map": "Buka peta",
-      "gallery.kicker": "Momen Kami",
-      "gallery.title": "Galeri",
+      "gallery.kicker": "Referensi Visual",
+      "gallery.title": "Inspirasi Pernikahan",
+      "gallery.note": "Foto stok untuk inspirasi pratinjau; bukan foto Nadia & Rafi.",
       "gallery.placeholder": "Foto pasangan akan ditambahkan di sini setelah tersedia.",
       "guest.kicker": "Untuk Anda",
       "guest.title": "Informasi untuk Tamu",
@@ -86,7 +87,7 @@
       description: "Digital wedding invitation.",
       skip: "Skip to the invitation",
       "preview.label": "Sample data",
-      "preview.message": "This preview uses fictional names, dates, venues, and contact details. Do not share it with guests.",
+      "preview.message": "This preview uses fictional details and licensed stock photos, not photos of the couple. Do not share it with guests.",
       "cover.kicker": "Wedding Invitation",
       "cover.intro": "With gratitude, we invite you to celebrate this special day with us.",
       "cover.open": "Open Invitation",
@@ -118,8 +119,9 @@
       "location.title": "Event Locations",
       "location.intro": "Location details will be added once the venue is confirmed.",
       "location.map": "Open map",
-      "gallery.kicker": "Our Moments",
-      "gallery.title": "Gallery",
+      "gallery.kicker": "Visual References",
+      "gallery.title": "Wedding Inspiration",
+      "gallery.note": "Licensed stock photos for preview inspiration; not photos of Nadia & Rafi.",
       "gallery.placeholder": "Couple photos will be added here when available.",
       "guest.kicker": "For You",
       "guest.title": "Guest Information",
@@ -546,15 +548,43 @@
       const figure = document.createElement("figure");
       const image = document.createElement("img");
       image.src = photo.src;
-      image.alt = localized(photo.alt, language, language === "id" ? "Foto pasangan" : "A photo of the couple");
+      image.alt = localized(photo.alt, language, language === "id" ? "Foto detail pernikahan" : "A wedding detail photo");
       image.loading = "lazy";
       image.decoding = "async";
       figure.appendChild(image);
+      const credit = document.createElement("figcaption");
+      credit.className = "photo-credit";
+      credit.appendChild(document.createTextNode(language === "id" ? "Foto oleh " : "Photo by "));
+      const photographerName = String(photo.creditName || "").trim();
+      const photographerUrl = safeMapUrl(photo.creditUrl);
+      if (photographerName && photographerUrl) {
+        const photographerLink = createTextElement("a", "", photographerName);
+        photographerLink.href = photographerUrl;
+        photographerLink.target = "_blank";
+        photographerLink.rel = "noopener noreferrer";
+        credit.appendChild(photographerLink);
+      } else {
+        credit.appendChild(document.createTextNode(photographerName || "Unsplash contributor"));
+      }
+      credit.appendChild(document.createTextNode(" · "));
+      const sourceUrl = safeMapUrl(photo.sourceUrl);
+      if (sourceUrl) {
+        const sourceLink = createTextElement("a", "", "Unsplash");
+        sourceLink.href = sourceUrl;
+        sourceLink.target = "_blank";
+        sourceLink.rel = "noopener noreferrer";
+        credit.appendChild(sourceLink);
+      } else {
+        credit.appendChild(document.createTextNode("Unsplash"));
+      }
+      figure.appendChild(credit);
       galleryGrid.appendChild(figure);
     });
     const hasPhotos = galleryGrid.childElementCount > 0;
     const galleryPlaceholder = byId("galleryPlaceholder");
+    const galleryNote = byId("galleryNote");
     if (galleryPlaceholder) galleryPlaceholder.hidden = hasPhotos;
+    if (galleryNote) galleryNote.hidden = !hasPhotos;
     gallery.hidden = false;
 
     const guestInfo = byId("guestInfo");

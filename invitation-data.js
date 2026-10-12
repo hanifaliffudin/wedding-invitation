@@ -95,7 +95,48 @@ window.INVITATION_DATA = {
       mapUrl: "https://maps.google.com/?q=Taman+Seruni+Cilandak+Jakarta"
     }
   ],
-  photos: [],
+  photos: [
+    {
+      src: "./assets/wedding-rings.jpg",
+      alt: {
+        id: "Dua cincin emas di atas kain putih",
+        en: "Two gold wedding rings on white fabric"
+      },
+      creditName: "Adi Albulescu",
+      creditUrl: "https://unsplash.com/@adialbulescu",
+      sourceUrl: "https://unsplash.com/photos/two-gold-wedding-rings-on-white-fabric-hNo86T4HMZM"
+    },
+    {
+      src: "./assets/bouquet-rings.jpg",
+      alt: {
+        id: "Cincin pernikahan di antara bunga berwarna merah muda dan putih",
+        en: "Wedding rings nestled among pink and white flowers"
+      },
+      creditName: "Haoward Nguyen",
+      creditUrl: "https://unsplash.com/@photos_by_me",
+      sourceUrl: "https://unsplash.com/photos/a-bouquet-of-flowers-with-two-wedding-rings-qSIpjZr11fE"
+    },
+    {
+      src: "./assets/reception-florals.jpg",
+      alt: {
+        id: "Meja resepsi dengan rangkaian bunga warna-warni",
+        en: "Wedding reception tables with colorful floral centerpieces"
+      },
+      creditName: "Mathis Payet Descombes",
+      creditUrl: "https://unsplash.com/@mathis_pyt",
+      sourceUrl: "https://unsplash.com/photos/wedding-reception-tables-with-floral-centerpieces-wYWeVmlGWHM"
+    },
+    {
+      src: "./assets/couple-hands-bouquet.jpg",
+      alt: {
+        id: "Tangan pasangan pengantin di atas buket bunga putih",
+        en: "A couple's hands resting on a white wedding bouquet"
+      },
+      creditName: "Fotógrafo Samuel Cruz",
+      creditUrl: "https://unsplash.com/@fotografosamuelcruz",
+      sourceUrl: "https://unsplash.com/photos/bride-and-grooms-hands-resting-on-wedding-bouquet-__ZPqLlynyI"
+    }
+  ],
   music: {
     src: "",
     title: {

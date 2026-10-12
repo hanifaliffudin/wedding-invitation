@@ -41,9 +41,15 @@
       "location.map": "Buka peta",
       "gallery.kicker": "Momen Kami",
       "gallery.title": "Galeri",
+      "gallery.placeholder": "Foto pasangan akan ditambahkan di sini setelah tersedia.",
+      "guest.kicker": "Untuk Anda",
+      "guest.title": "Informasi untuk Tamu",
+      "guest.intro": "Catatan singkat untuk membantu Anda merencanakan kehadiran.",
+      "guest.giftTitle": "Informasi Hadiah",
       "rsvp.kicker": "Kabar dari Anda",
       "rsvp.title": "Konfirmasi Kehadiran",
       "rsvp.intro": "Mohon isi konfirmasi di bawah ini. Pesan akan disiapkan untuk dikirim melalui WhatsApp.",
+      "rsvp.deadline": "Mohon konfirmasi kehadiran paling lambat {date}.",
       "rsvp.name": "Nama lengkap",
       "rsvp.attendance": "Apakah Anda akan hadir?",
       "rsvp.yes": "Ya, saya akan hadir",
@@ -114,9 +120,15 @@
       "location.map": "Open map",
       "gallery.kicker": "Our Moments",
       "gallery.title": "Gallery",
+      "gallery.placeholder": "Couple photos will be added here when available.",
+      "guest.kicker": "For You",
+      "guest.title": "Guest Information",
+      "guest.intro": "A few notes to help you plan your visit.",
+      "guest.giftTitle": "Gift Information",
       "rsvp.kicker": "A note from you",
       "rsvp.title": "Please RSVP",
       "rsvp.intro": "Please fill in your response below. Your message will be prepared for WhatsApp.",
+      "rsvp.deadline": "Please reply by {date}.",
       "rsvp.name": "Full name",
       "rsvp.attendance": "Will you be joining us?",
       "rsvp.yes": "Yes, I will be there",
@@ -230,6 +242,23 @@
     text("closingNames", firstName + " & " + secondName);
     text("coverDate", formattedDate || COPY[language]["date.tbd"]);
     text("heroDate", formattedDate || COPY[language]["date.tbd"]);
+    const hostValue = DATA.hosts && (DATA.hosts[language] || DATA.hosts.id || DATA.hosts.en);
+    const hostText = Array.isArray(hostValue)
+      ? hostValue.map(function (item) { return String(item || "").trim(); }).filter(Boolean).join("\n")
+      : localized(hostValue, language, "");
+    const hostNode = byId("heroHosts");
+    if (hostNode) {
+      hostNode.textContent = hostText;
+      hostNode.hidden = !hostText;
+    }
+    const deadline = formatDate(DATA.rsvpDeadline, { day: "numeric", month: "long", year: "numeric" });
+    const deadlineNode = byId("rsvpDeadline");
+    if (deadlineNode) {
+      deadlineNode.textContent = deadline
+        ? interpolate(COPY[language]["rsvp.deadline"], { date: deadline })
+        : "";
+      deadlineNode.hidden = !deadline;
+    }
     document.title = first && second
       ? (language === "id" ? "Pernikahan " : "The Wedding of ") + first + " & " + second
       : (language === "id" ? "Undangan Pernikahan | Pratinjau" : "Wedding Invitation | Preview");
@@ -427,7 +456,14 @@
       const title = localized(event.title, language, (language === "id" ? "Acara " : "Event ") + (index + 1));
       const venue = localized(event.venue, language, copy["event.venueTbd"]);
       const address = localized(event.address, language, copy["event.addressTbd"]);
-      const time = formatDate(event.startsAt, { weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+      const eventDate = formatDate(event.startsAt, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      const startTime = formatDate(event.startsAt, { hour: "2-digit", minute: "2-digit" });
+      const endDate = formatDate(event.endsAt, { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      const endTime = formatDate(event.endsAt, { hour: "2-digit", minute: "2-digit" });
+      const sameEventDay = eventDate && endDate && eventDate === endDate;
+      const time = eventDate && startTime
+        ? eventDate + " · " + startTime + (endTime ? (sameEventDay ? "–" : " – " + endDate + " · ") + endTime : "")
+        : "";
       const mapUrl = safeMapUrl(event.mapUrl);
 
       const card = document.createElement("article");
@@ -516,7 +552,35 @@
       figure.appendChild(image);
       galleryGrid.appendChild(figure);
     });
-    gallery.hidden = galleryGrid.childElementCount === 0;
+    const hasPhotos = galleryGrid.childElementCount > 0;
+    const galleryPlaceholder = byId("galleryPlaceholder");
+    if (galleryPlaceholder) galleryPlaceholder.hidden = hasPhotos;
+    gallery.hidden = false;
+
+    const guestInfo = byId("guestInfo");
+    const guestNoteGrid = byId("guestNoteGrid");
+    const giftNote = byId("giftNote");
+    const guestNotes = Array.isArray(DATA.guestNotes) ? DATA.guestNotes : [];
+    if (guestNoteGrid) {
+      guestNoteGrid.replaceChildren();
+      guestNotes.forEach(function (note) {
+        const label = localized(note && note.label, language, "");
+        const value = localized(note && note.value, language, "");
+        if (!label || !value) return;
+        const article = document.createElement("article");
+        article.className = "guest-note";
+        article.appendChild(createTextElement("h3", "", label));
+        article.appendChild(createTextElement("p", "", value));
+        guestNoteGrid.appendChild(article);
+      });
+    }
+    const giftText = localized(DATA.giftInfo, language, "");
+    if (giftNote) giftNote.hidden = !giftText;
+    text("giftMessage", giftText);
+    if (guestInfo) {
+      guestInfo.hidden = (!guestNoteGrid || guestNoteGrid.childElementCount === 0) && !giftText;
+    }
+    observeRevealTargets(guestInfo);
   }
 
   function readAttendance() {

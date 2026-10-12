@@ -76,6 +76,7 @@
             <p class="eyebrow" data-copy="hero.kicker">Dengan penuh kebahagiaan</p>
             <h2 class="hero__names" id="heroTitle"><span id="partnerOne">Nama Mempelai 1</span><span class="hero__ampersand" aria-hidden="true">&amp;</span><span id="partnerTwo">Nama Mempelai 2</span></h2>
             <p class="hero__invitation" data-copy="hero.invitation">mengundang Anda untuk hadir dan berbagi kebahagiaan di hari pernikahan kami.</p>
+            <p class="hero__hosts" id="heroHosts" hidden></p>
             <p class="hero__date" id="heroDate">Tanggal akan diisi</p>
             <div class="countdown" id="countdown" hidden aria-live="polite">
               <span class="countdown__number" id="countdownDays">0</span>
@@ -117,6 +118,10 @@
             <h2 id="galleryTitle" data-copy="gallery.title">Galeri</h2>
           </div>
           <div class="gallery-grid" id="galleryGrid"></div>
+          <div class="gallery-placeholder" id="galleryPlaceholder" hidden>
+            <span class="gallery-placeholder__ornament" aria-hidden="true">❧</span>
+            <p data-copy="gallery.placeholder">Foto pasangan akan ditambahkan di sini.</p>
+          </div>
         </section>
 
         <section class="location-section section-shell" id="location" aria-labelledby="locationTitle" data-reveal>
@@ -129,11 +134,25 @@
           <div class="location-list" id="locationList"></div>
         </section>
 
+        <section class="guest-info-section section-shell" id="guestInfo" aria-labelledby="guestInfoTitle" data-reveal hidden>
+          <div class="section-heading">
+            <p class="eyebrow" data-copy="guest.kicker">Untuk Anda</p>
+            <h2 id="guestInfoTitle" data-copy="guest.title">Informasi untuk Tamu</h2>
+            <p class="section-heading__intro" data-copy="guest.intro">Catatan singkat untuk membantu Anda merencanakan kehadiran.</p>
+          </div>
+          <div class="guest-note-grid" id="guestNoteGrid"></div>
+          <article class="gift-note" id="giftNote" hidden>
+            <h3 data-copy="guest.giftTitle">Informasi Hadiah</h3>
+            <p id="giftMessage"></p>
+          </article>
+        </section>
+
         <section class="rsvp-section section-shell" id="rsvp" aria-labelledby="rsvpTitle" data-reveal>
           <div class="section-heading">
             <p class="eyebrow" data-copy="rsvp.kicker">Kabar dari Anda</p>
             <h2 id="rsvpTitle" data-copy="rsvp.title">Konfirmasi Kehadiran</h2>
             <p class="section-heading__intro" data-copy="rsvp.intro">Mohon isi konfirmasi di bawah ini. Pesan akan disiapkan untuk dikirim melalui WhatsApp.</p>
+            <p class="rsvp-deadline" id="rsvpDeadline" hidden></p>
           </div>
 
           <form class="rsvp-form" id="rsvpForm" novalidate>

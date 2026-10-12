@@ -487,6 +487,15 @@ textarea:focus-visible {
   line-height: 1.65;
 }
 
+.hero__hosts {
+  margin: 1.2rem 0 0;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 0.98rem;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
 .hero__date {
   margin: 1.3rem 0 0;
 }
@@ -573,6 +582,7 @@ textarea:focus-visible {
 .details-section,
 .gallery-section,
 .location-section,
+.guest-info-section,
 .rsvp-section {
   padding-block: clamp(4rem, 10vw, 7rem);
 }
@@ -724,6 +734,30 @@ textarea:focus-visible {
   object-fit: cover;
 }
 
+.gallery-placeholder {
+  display: grid;
+  min-height: 12rem;
+  place-content: center;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--line-dark);
+  color: var(--muted);
+  background: rgb(255 253 249 / 55%);
+  text-align: center;
+}
+
+.gallery-placeholder p {
+  max-width: 30rem;
+  margin: 0;
+}
+
+.gallery-placeholder__ornament {
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1.65rem;
+}
+
 .location-section {
   position: relative;
 }
@@ -774,6 +808,56 @@ textarea:focus-visible {
 .location-item__map {
   flex: 0 0 auto;
   align-self: center;
+}
+
+.guest-info-section {
+  max-width: 76rem;
+  background: var(--white);
+}
+
+.guest-note-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 1rem 1.5rem;
+}
+
+.guest-note {
+  min-width: 0;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.guest-note h3,
+.gift-note h3 {
+  margin: 0 0 0.35rem;
+  color: var(--plum);
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.guest-note p,
+.gift-note p {
+  margin: 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.gift-note {
+  width: min(100%, 45rem);
+  margin: 2rem auto 0;
+  padding: 1.35rem;
+  border: 1px solid var(--line-dark);
+  background: var(--paper);
+  text-align: center;
+}
+
+.rsvp-deadline {
+  margin: 0.8rem 0 0;
+  color: var(--rose-dark);
+  font-size: 0.9rem;
+  font-weight: 650;
 }
 
 .rsvp-section {
@@ -1103,6 +1187,7 @@ textarea:focus-visible {
   .details-section,
   .gallery-section,
   .location-section,
+  .guest-info-section,
   .rsvp-section {
     padding-block: 4rem;
   }
